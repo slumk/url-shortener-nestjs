@@ -13,13 +13,6 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    ServeStaticModule.forRoot({
-      serveRoot: '/uploads',
-      serveStaticOptions: {
-        index: false
-      },
-      rootPath: join(__dirname, '..', '..', 'uploads')
-    }),
     DatabaseModule,
     LoggerModule,
     UsersModule,

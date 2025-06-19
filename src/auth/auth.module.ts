@@ -7,19 +7,17 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 import { DatabaseModule } from 'utils/db/db.module';
 import { PasswordService } from 'utils/passwords.service';
 
+const jwtModule = JwtModule.register({
+  global: true,
+  secret: process.env.JWT_SECRET,
+  signOptions: { expiresIn: process.env.JWT_EXPIRES },
+});
+
 @Global()
 @Module({
-  imports: [
-    ConfigModule,
-    DatabaseModule,
-    JwtModule.register({
-      global: true,
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: process.env.JWT_EXPIRES },
-    }),
-  ],
+  imports: [ConfigModule, DatabaseModule, jwtModule],
   controllers: [AuthController],
   providers: [Logger, AuthService, JwtStrategy, PasswordService],
-  exports: [AuthService],
+  exports: [AuthService]
 })
 export class AuthModule {}

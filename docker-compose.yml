@@ -14,6 +14,10 @@ services:
       - redis
     environment:
       DATABASE_URL: postgres://postgres:password@postgres:5432/shortener_db
+      PORT: 3000
+      NODE_ENV: development
+      JWT_SECRET: youknowthatsmybiggestsecret
+      JWT_EXPIRES: 43200m
       REDIS_HOST: redis
       REDIS_PORT: 6379
 
