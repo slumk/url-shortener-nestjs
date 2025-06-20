@@ -20,6 +20,7 @@ model Users {
   password          String
   lastLoginAt       DateTime?
 
+  urls URLMappings[]
   tokens UserSession[]
   @@index([email])
 }
@@ -32,4 +33,17 @@ model UserSession {
   createdAt DateTime @default(now())
 
   @@index([userId])
+}
+
+model URLMappings {
+  id String @id @default(uuid())
+  userId String
+  user Users @relation(fields: [userId], onDelete: Cascade, references: [id])
+  ogURL String
+  mappedTail String
+  createdAt DateTime @default(now())
+
+  @@unique([ogURL, mappedTail])
+  @@index([ogURL])
+  @@index([mappedTail])
 }

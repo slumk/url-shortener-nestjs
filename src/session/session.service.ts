@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { SessionDomain } from './domain/session.domain';
 import { SessionRepository } from './session.repository';
-import DateHelpers from 'utils/DateHelpers';
+import DateHelpers from 'utils/dates.helper';
 
 @Injectable()
 export class SessionService {

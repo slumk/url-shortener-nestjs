@@ -6,6 +6,5 @@
   "extensions": [
     "Prisma.prisma",
     "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
   ]
 }
