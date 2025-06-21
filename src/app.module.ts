@@ -9,6 +9,7 @@ import { SessionModule } from './session/session.module';
 import { ConfigModule } from '@nestjs/config';
 import { UrlsModule } from './urls/urls.module';
 import { AppController } from './app.controller';
+import { RedisModule } from 'utils/redis/redis.module';
 
 @Module({
   controllers: [AppController],
@@ -19,6 +20,7 @@ import { AppController } from './app.controller';
     DatabaseModule,
     LoggerModule,
     UsersModule,
+    RedisModule,
     SessionModule,
     AuthModule,
     UrlsModule

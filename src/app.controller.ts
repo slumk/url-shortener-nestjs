@@ -10,10 +10,10 @@ export class AppController {
   ){}
 
   @Get(':shortenedTail')
-  async dealWithShortenedURL(@Param() params: { path: string }, @Res() response: Response) {
+  async dealWithShortenedURL(@Param() params: { shortenedTail: string }, @Res() response: Response) {
     // this will recieive the shortened url request
     // and possibly reroute into og url
-    const shortenedURL = await this.urlService.checkShortenedURL(params.path)
-    return response.redirect(shortenedURL.ogURL)
+    const originalURL = await this.urlService.checkShortenedURL(params.shortenedTail)
+    return response.redirect(originalURL)
   }
 }

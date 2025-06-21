@@ -39,10 +39,10 @@ export class UrlsService {
   }
 
   async checkShortenedURL(path: string) {
-    const entryFound = await this.urlRepo.findOne({ mappedTail: path });
+    const entryFound = await this.urlRepo.findByTail(path);
     if (!entryFound) throw new NotFoundException();
-    await this.urlRepo.update(entryFound.id, {
-      hitCount: ++entryFound.hitCount
+    await this.urlRepo.updateOne({ mappedTail: entryFound }, {
+      hitCount: { increment: 1 }
     });
     return entryFound;
   }
