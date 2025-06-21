@@ -8,8 +8,10 @@ import { AuthModule } from './auth/auth.module';
 import { SessionModule } from './session/session.module';
 import { ConfigModule } from '@nestjs/config';
 import { UrlsModule } from './urls/urls.module';
+import { AppController } from './app.controller';
 
 @Module({
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true

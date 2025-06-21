@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Get, Post, Body, Patch, Param, Delete, Query, Controller } from '@nestjs/common';
 import { UrlsService } from './urls.service';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
@@ -32,3 +32,5 @@ export class UrlsController {
     return this.urlsService.remove(id);
   }
 }
+
+

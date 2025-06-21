@@ -41,6 +41,7 @@ model URLMappings {
   user Users @relation(fields: [userId], onDelete: Cascade, references: [id])
   ogURL String
   mappedTail String
+  hitCount Int @default(0)
   createdAt DateTime @default(now())
 
   @@unique([ogURL, mappedTail])

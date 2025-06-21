@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "URLMappings" ADD COLUMN     "hitCount" INTEGER NOT NULL DEFAULT 0;
