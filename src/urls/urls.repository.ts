@@ -32,8 +32,8 @@ export class UrlsRepository {
     });
   }
 
-  async updateOne(where: Prisma.URLMappingsWhereInput, params: Prisma.URLMappingsUpdateInput){
-    return await this.dbService.uRLMappings.updateMany({
+  async updateOne(where: Prisma.URLMappingsWhereUniqueInput, params: Prisma.URLMappingsUpdateInput){
+    return await this.dbService.uRLMappings.update({
       where, data: params
     })
   }
@@ -47,6 +47,7 @@ export class UrlsRepository {
   async find(where: Prisma.URLMappingsWhereInput, limit: number, skip: number) {
     return await this.dbService.uRLMappings.findMany({
       where,
+      include: { hits: true },
       take: limit,
       skip,
     });

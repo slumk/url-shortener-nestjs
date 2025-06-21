@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Ip, NotFoundException } from '@nestjs/common';
 import { CreateUrlDto } from './dto/create-url.dto';
 import { UpdateUrlDto } from './dto/update-url.dto';
 import { UrlsRepository } from './urls.repository';
@@ -38,13 +38,25 @@ export class UrlsService {
     return { updated: true };
   }
 
-  async checkShortenedURL(path: string) {
-    const entryFound = await this.urlRepo.findByTail(path);
-    if (!entryFound) throw new NotFoundException();
-    await this.urlRepo.updateOne({ mappedTail: entryFound }, {
-      hitCount: { increment: 1 }
-    });
-    return entryFound;
+  private async recordURLHit(mappedTail: string, ip_address: string) {
+    await this.urlRepo.updateOne(
+      { mappedTail },
+      {
+        hitCount: { increment: 1 },
+        hits: {
+          create: {
+            ip_address
+          }
+        }
+      },
+    );
+  }
+
+  async checkShortenedURL(path: string, ip_address: string) {
+    const ogURL = await this.urlRepo.findByTail(path);
+    if (!ogURL) throw new NotFoundException();
+    this.recordURLHit(path, ip_address)
+    return ogURL;
   }
 
   async remove(id: string) {

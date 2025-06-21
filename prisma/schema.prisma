@@ -35,14 +35,24 @@ model UserSession {
   @@index([userId])
 }
 
+model URLHits {
+  id String @id @default(uuid())
+  ip_address String
+  createdAt DateTime @default(now())
+
+  urlMapping URLMappings @relation(fields: [id], references: [id], onDelete: Cascade)
+}
+
 model URLMappings {
   id String @id @default(uuid())
   userId String
   user Users @relation(fields: [userId], onDelete: Cascade, references: [id])
   ogURL String
-  mappedTail String
+  mappedTail String @unique
   hitCount Int @default(0)
   createdAt DateTime @default(now())
+
+  hits URLHits[]
 
   @@unique([ogURL, mappedTail])
   @@index([ogURL])

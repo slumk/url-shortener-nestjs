@@ -1,0 +1,11 @@
+-- CreateTable
+CREATE TABLE "URLHits" (
+    "id" TEXT NOT NULL,
+    "ip_address" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "URLHits_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "URLHits" ADD CONSTRAINT "URLHits_id_fkey" FOREIGN KEY ("id") REFERENCES "URLMappings"("id") ON DELETE CASCADE ON UPDATE CASCADE;
